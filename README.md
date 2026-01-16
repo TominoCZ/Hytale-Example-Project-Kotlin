@@ -1,6 +1,6 @@
-# Hytale Example Plugin
+# Hytale Example Plugin (Kotlin)
 
-An example project that can build and run plugins for the game Hytale!
+An example project that can build and run Kotlin plugins for the game Hytale!
 
 > **⚠️ Warning: Early Access**    
 > The game Hytale is in early access, and so is this project! Features may be
@@ -8,11 +8,12 @@ An example project that can build and run plugins for the game Hytale!
 > continues.
 
 ## Introduction
-This project contains a Gradle project that can be imported into IDEA and used
-as the foundation for custom Hytale plugins. The template will add the Hytale
-server to your classpath and create a run configuration that can be used to
-run your plugin on the server. It can also be used to build a sharable JAR file
-that contains your plugin.
+This is a **Kotlin** fork of the original Java example project. It contains a 
+Gradle project with Kotlin DSL build files that can be imported into IDEA and 
+used as the foundation for custom Hytale plugins written in Kotlin. The template 
+will add the Hytale server to your classpath and create a run configuration that 
+can be used to run your plugin on the server. It can also be used to build a 
+sharable JAR file that contains your plugin with the Kotlin runtime bundled.
 
 ## Requirements
 Please ensure all the requirements are met before getting started.
@@ -26,7 +27,7 @@ It is important to configure the project before using it as a template. Doing
 this before importing the project will help avoid running into caching issues
 later on.
 
-### 1: Project Name
+### 1: Project Name.kts
 Set the name of the project in `settings.gradle`. This should be the name of
 your plugin. We recommend capitalizing your project name and avoiding 
 whitespace and most special characters. This will be used as the base name for
@@ -42,7 +43,8 @@ The manifest file provides important information about your plugin to Hytale.
 You should update every property in this file to reflect your project. The 
 most important property to set is `Main` which tells the game which class
 file to load as the entry point for your plugin. The file can be found at 
-`src/main/resources/manifest.json`.
+`src/main/resources/manifest.json`. Note that Kotlin classes work seamlessly
+as plugin entry points.
 
 **This template has configured Gradle to automatically update the `Version` and
 `IncludesAssetPack` property to reflect your Gradle properties every time you 
@@ -81,11 +83,10 @@ If you are unable to run commands from the IDEA terminal, you can also run the
 command from code like this. Make sure to remove the code after your server is
 authenticated.
 
-```java
-    @Override
-    protected void start() {
-        CommandManager.get().handleCommand(ConsoleSender.INSTANCE, "auth login device");
-    }
+```kotlin
+override fun setup() {
+    CommandManager.get().handleCommand(ConsoleSender.INSTANCE, "auth login device")
+}
 ```
 
 
